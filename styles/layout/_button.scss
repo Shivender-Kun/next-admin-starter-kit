@@ -1,0 +1,51 @@
+.delete-button {
+  border: 1px solid $theme_color_1;
+  color: $theme_color_1;
+  transform: $global_transition !important;
+  background-color: transparent;
+
+  &:hover {
+    background-color: $theme_color_2 !important;
+    color: $global_white_color !important;
+  }
+}
+
+.no-border {
+  border: none !important;
+  &:hover {
+    background-color: $global_white_color !important;
+    color: $theme_color_2 !important;
+  }
+}
+
+.block-button {
+  color: $global_white_color;
+  background-color: $theme_color_2;
+  border: 1px solid $theme_color_1 !important;
+
+  &:hover {
+    color: $theme_color_2 !important;
+    background-color: $global_white_color !important;
+  }
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 5px;
+  min-width: 130px;
+  font-size: 16px;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &:disabled {
+    cursor: default;
+    color: inherit !important;
+    background-color: inherit !important;
+  }
+}

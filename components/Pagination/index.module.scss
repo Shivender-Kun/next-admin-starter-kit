@@ -1,0 +1,36 @@
+@import "../../styles/configs/colors";
+@import "../../styles/configs/fonts";
+@import "../../styles/configs/ui";
+
+.pagination {
+  &__view {
+    font-size: large;
+    margin-right: 10px;
+  }
+
+  &__button {
+    display: flex;
+  }
+
+  &__button-icon {
+    border: 1px solid $theme_color_1 !important;
+    margin-right: 5px !important;
+    margin-left: 5px !important;
+
+    &:hover {
+      background-color: $theme_color_1 !important;
+
+      > .pagination-button-icon-arrow {
+        color: $theme_color_4 !important;
+      }
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__location {
+    color: $theme_color_1;
+  }
+}

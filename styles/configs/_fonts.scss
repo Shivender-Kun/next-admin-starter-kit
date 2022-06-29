@@ -1,0 +1,5 @@
+// importing the default font for application
+$font_family: "Montserrat";
+$logo_font_family: "Montserrat";
+@import url("https://fonts.googleapis.com/css?family=#{$font_family}");
+@import url("https://fonts.googleapis.com/css?family=#{$logo_font_family}");

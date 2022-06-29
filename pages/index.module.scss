@@ -1,0 +1,183 @@
+@import "../styles/configs/_fonts.scss";
+@import "../styles/configs/_colors.scss";
+@import "../styles/configs/_ui.scss";
+
+.loginPage {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background: white;
+}
+
+.loginPageLeft {
+  position: relative;
+  flex: 0.55;
+  overflow: hidden;
+
+  .loginPageLeft-fill {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background: #f0f3f3;
+    // background-image: url("../../assets/images/login_background.png");
+    // background-size: cover;
+    // background-repeat: no-repeat;
+
+    .loginPage-logo {
+      z-index: 10;
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      h2 {
+        font-size: 3rem;
+        margin-bottom: 3rem;
+        font-weight: 500;
+      }
+
+      &Img {
+        width: 48%;
+        max-width: 250px;
+        object-fit: contain;
+        border-radius: 15px;
+      }
+    }
+  }
+}
+
+.loginPageRight {
+  flex: 0.45;
+  display: grid;
+  place-items: center;
+
+  .form-container {
+    min-width: 63%;
+    display: flex;
+    flex-direction: column;
+
+    .user-login {
+      padding: 17px;
+
+      .input-field-password {
+        position: relative;
+      }
+
+      .btn-container {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+
+        .login-btn {
+          width: 97%;
+          height: 64px;
+          border-radius: 7px;
+          cursor: pointer;
+          color: $global_white_color !important;
+          background: $theme_color_1 !important;
+          transition: filter 200ms ease-in !important;
+
+          &:hover {
+            filter: brightness(1.2);
+          }
+
+          &:focus {
+            outline: none !important;
+          }
+        }
+      }
+
+      .input-field-text,
+      .input-field-password {
+        .input-login-containers {
+          position: relative;
+          display: flex;
+          align-items: center;
+          border: #b3b3b3 1px solid;
+          border-radius: 10px;
+          padding: 10px;
+          margin-top: 45px;
+          margin-bottom: 10px;
+
+          .label-name {
+            position: absolute;
+            bottom: 30%;
+            left: 50px;
+            color: $global_grey_one;
+            pointer-events: none;
+            transition: $global_transition;
+          }
+
+          .custom-field {
+            border: none;
+            padding: $global_container_padding;
+            color: $global_black_color;
+
+            &:focus {
+              outline: none;
+            }
+          }
+
+          .login-field {
+            flex: 1;
+          }
+
+          .input-icon {
+            color: $global_grey_one !important;
+          }
+
+          .password-icon {
+            position: absolute;
+            top: 30%;
+            right: 10px;
+          }
+        }
+
+        .input-login-containers input:focus + .label-name,
+        .input-login-containers input:not(:focus):valid + .label-name {
+          bottom: 110%;
+          left: 0;
+          color: $global_black_color;
+          font-size: 20px;
+        }
+
+        .loginPageCheckbox {
+          margin-right: 8px;
+        }
+
+        .checkbox-text {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .logo-text {
+      //color: $theme_color_1;
+      font-family: $logo_font;
+      color: #090909;
+      font-size: 40px;
+    }
+
+    .sub-heading {
+      font-size: 25px;
+      text-align: center;
+      // font-weight: 600;
+      margin-bottom: 10px;
+      color: #090909;
+    }
+  }
+}
+
+/////////// media-quires//////////
+
+@media only screen and (max-width: 750px) {
+  .loginPageLeft {
+    display: none;
+  }
+
+  .loginPageRight {
+    flex: 1;
+  }
+}

@@ -1,0 +1,103 @@
+@import "../../styles/configs/colors";
+
+.dasboard-container {
+  width: 100%;
+  height: calc(100% - 78px);
+}
+
+.dashboard {
+  margin-top: 35px;
+  margin-left: 35px;
+  margin-right: 35px;
+}
+
+.dashboard-stats {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.content-title {
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin: 2rem 1rem 0;
+}
+
+.dashboard-card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  margin-top: 40px;
+  height: 120px;
+  flex: 1;
+  max-width: 300px;
+  min-width: 300px;
+  //max-width: 500px;
+  justify-content: center;
+  margin: 20px;
+}
+
+.card-container {
+  position: relative;
+  border: 2px solid #cccccc;
+  background-color: #fafaf9;
+  width: 100%;
+  border-radius: 13px;
+  display: flex;
+  justify-content: center;
+}
+
+.card-title {
+  width: 90%;
+  text-align: center;
+  margin-top: 25px;
+  color: $theme_color_1;
+  font-size: 20px;
+}
+
+// .modify-dashboard-card {
+//     justify-content: left;
+// }
+
+.card-show {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.card-stats {
+  font-size: 25px;
+}
+
+/*==================================================
+ * 3D SHADOW
+ * ===============================================*/
+
+.threeD-shadow {
+  position: relative;
+  box-shadow: 0 25px 25px -35px rgba(0, 0, 0, 0.15);
+}
+
+.threeD-shadow::before,
+.threeD-shadow::after {
+  content: "";
+  position: absolute;
+  top: 90%;
+  bottom: 16px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+
+.threeD-shadow::before {
+  background: transparent;
+  left: 10px;
+  right: 45px;
+  transform: rotate(-3deg);
+}
+
+.threeD-shadow::after {
+  background: transparent;
+  left: 45px;
+  right: 10px;
+  transform: rotate(3deg);
+}

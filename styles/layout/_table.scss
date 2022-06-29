@@ -1,0 +1,134 @@
+@import "../configs/colors";
+
+.table-address {
+  word-break: break-all;
+  max-width: 280px;
+  min-width: 150px;
+  text-overflow: ellipsis;
+  overflow-y: auto;
+  max-height: 50px;
+  padding: 0 5px;
+  margin-right: 20px;
+}
+
+.table-container {
+  position: relative;
+}
+
+.table-subContainer {
+  overflow: auto;
+  height: calc(100vh - 230px);
+  max-width: 98vw;
+  border-radius: 15px;
+}
+
+.table {
+  min-width: 100%;
+  border-collapse: collapse;
+
+  .custom-head {
+    th {
+      min-width: 200px !important;
+    }
+  }
+
+  th {
+    text-align: left !important;
+    padding: 5px 15px;
+    min-width: 80px;
+    cursor: default;
+  }
+
+  th:nth-child(1) {
+    min-width: 80px !important;
+    width: 80px !important;
+  }
+
+  th:nth-last-child(1) {
+    min-width: 150px !important;
+    width: 150px !important;
+  }
+
+  .table-head {
+    // border: 1px solid #dee2e6 !important;
+    background-color: $theme_color_1;
+    color: white;
+    border-radius: 20px;
+  }
+
+  .table-body {
+    font-size: 13px !important;
+    // color: $theme_color_1;
+  }
+
+  .head-tr {
+    height: 5rem;
+
+    th > div {
+      margin-right: 20px;
+    }
+  }
+
+  .head-tr > th {
+    vertical-align: middle !important;
+  }
+
+  .body-tr {
+    height: 5rem;
+    border-bottom: 1px solid #dee2e6 !important;
+    font-size: 0.85rem;
+  }
+
+  .body-tr > td {
+    vertical-align: middle !important;
+    word-break: break-word;
+    padding: 5px 15px;
+    cursor: default;
+    min-height: 70px;
+  }
+}
+
+.table-status {
+  display: flex;
+  height: 80px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.emptyTable {
+  padding: 1rem;
+  font-size: 1.2rem;
+}
+
+.mentorId-image {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: default;
+}
+
+@include tableXL {
+  .table {
+    min-width: 1250px;
+  }
+}
+
+@include tableL {
+  .table-subContainer {
+    height: calc(100vh - 250px);
+  }
+}
+
+@media tableT {
+  .table-subContainer {
+    height: calc(100vh - 250px);
+  }
+}
+
+@media tableTS {
+  .table-subContainer {
+    height: calc(100vh - 400px);
+  }
+}

@@ -1,0 +1,140 @@
+@import "./styles/configs/colors";
+@import "./styles/configs/fonts";
+@import "./styles/configs/ui";
+
+@mixin flexAlignCenter {
+  display: flex;
+  align-items: center;
+}
+
+.content-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.content {
+  margin: 35px;
+  margin-bottom: 0;
+  min-width: calc(100% - 70px);
+  display: flex;
+  flex-direction: column;
+}
+
+.content-heading {
+  font-size: 24px;
+  min-height: 57px;
+  display: flex;
+  align-items: center;
+}
+
+.content-top {
+  @include flexAlignCenter();
+  flex-wrap: wrap;
+  justify-content: space-between;
+  min-height: 57px;
+}
+
+.content-top-left {
+  @include flexAlignCenter();
+  margin-left: 20px;
+  justify-content: space-between;
+}
+
+.content-bottom {
+  flex: 1;
+  margin-top: 30px;
+}
+
+.date-filter {
+  margin: 0.5rem 1px;
+  background: #e4e6e552;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+
+  button,
+  button:hover {
+    background-color: $theme_color_2;
+    color: white;
+  }
+
+  * {
+    border-color: black !important;
+  }
+}
+
+.content-middle {
+  @include flexAlignCenter();
+}
+
+.content-center {
+  @include flexAlignCenter();
+}
+
+.sidebar {
+  background-color: $theme_color_1;
+  color: $global_white_color;
+  height: calc(100% - 78px);
+  min-height: 820px;
+}
+
+.sidebar-item {
+  display: flex;
+  width: 100% !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  height: 70px !important;
+  transition: $global_transition !important;
+  font-size: 16px !important;
+  cursor: pointer;
+  color: white !important;
+}
+
+.sidebar-item:focus {
+  outline: none !important;
+}
+
+.sidebar-icon {
+  margin-left: 10%;
+  margin-right: 10px;
+  margin-bottom: 2px;
+}
+
+.sidebar-item:hover,
+.item-active {
+  background: $theme_color_4 !important;
+  color: $theme_color_1 !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+.dynamicContainer {
+  flex: 1;
+}
+
+.small-navigation-sidebar {
+  min-width: 70px !important;
+  flex: 0 !important;
+
+  .sidebar-item {
+    font-size: 0 !important;
+  }
+
+  .sidebar-icon {
+    margin: 0 auto !important;
+  }
+}
+
+.editor-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 600px;
+  width: 100%;
+  max-width: 2000px;
+}
+
+.editor-note {
+  margin-right: auto;
+  margin-top: 15px;
+}

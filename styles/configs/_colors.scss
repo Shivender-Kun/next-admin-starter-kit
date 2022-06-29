@@ -1,0 +1,18 @@
+$theme_color_1: #070607;
+$theme_color_2: #16151a;
+$theme_color_3: #1f3126;
+$theme_color_4: #ffffff;
+$theme_color_5: #fcfcfc;
+$theme_color_6: #939496;
+
+$theme_color: rgb(121, 177, 222);
+$theme_background: linear-gradient(
+  90deg,
+  $theme_color_2 0%,
+  $theme_color_3 35%,
+  $theme_color_4 100%
+);
+
+// $theme_background: linear-gradient(30deg, #EE5A3B 0%, #F8AF30 100%); /* w3c */
+// $theme_background:linear-gradient(30deg, #72c7ed 10%, #8390c6 100%); /* w3c */
+$theme_background: #f98036;

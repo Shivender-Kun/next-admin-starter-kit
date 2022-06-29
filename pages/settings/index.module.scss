@@ -1,0 +1,45 @@
+@import "../../styles/configs/fonts";
+@import "../../styles/configs/colors";
+@import "../../styles/configs/ui";
+
+.sidebar-modify {
+  padding-top: 35px;
+  background-color: $theme_color_2;
+  color: $global_white_color;
+  height: 100%;
+}
+
+.settings-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.sidebar-modify-container {
+  //border-radius: 0 40px 0 0;
+  background-color: $theme_color_2;
+  flex: 0.14;
+  min-width: 275px;
+}
+
+.sidebar-modify-container-toggle {
+  flex: 0;
+  min-width: 50px;
+}
+
+.dynamic-setting-content {
+  flex: 1;
+}
+
+.small-sidebar-modify-container {
+  min-width: 75px !important;
+  flex: 0 !important;
+
+  .sidebar-item {
+    font-size: 0 !important;
+  }
+
+  .sidebar-icon {
+    margin: 0 auto !important;
+  }
+}

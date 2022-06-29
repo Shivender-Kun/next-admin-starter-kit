@@ -1,0 +1,42 @@
+@import "../../styles/configs/colors";
+@import "../../styles/configs/fonts";
+@import "../../styles/configs/ui";
+
+.dropdown {
+  &__container {
+    width: 15rem;
+    height: 2.7rem;
+    margin: 0 10px;
+    border-radius: 6px;
+    border: 1px solid #dee2e6 !important;
+  }
+
+  &__modify-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+}
+
+.search {
+  &__input {
+    width: 65%;
+    border: none;
+    margin-right: 10px;
+    font-size: 1rem !important;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__go {
+    height: 2.9rem;
+    color: $theme_color_1;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 6px;
+    width: 3rem !important;
+    background-color: #e3e3e3;
+  }
+}

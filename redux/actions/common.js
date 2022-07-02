@@ -199,7 +199,7 @@ export const genericCreateEntity =
     if (multipart) {
       const formData = new FormData();
 
-      if (picture) formData.append("picture", picture);
+      if (picture) formData.append("image", picture);
       formData.append("data", JSON.stringify(payload));
       requestHeaders["Content-Type"] = "multipart/form-data";
       requestHeaders["Authorization"] = localStorage.getItem("accessToken");

@@ -26,7 +26,7 @@ const Dashboard = (props) => {
   useEffect(() => {
     triggerFetchEntity(APPLICATION_ROUTES.DASHBOARD);
     triggerSwitchNavigation(navigationIndexer.dashboard);
-  }, []);
+  }, [triggerFetchEntity, triggerSwitchNavigation]);
 
   return (
     <Main>

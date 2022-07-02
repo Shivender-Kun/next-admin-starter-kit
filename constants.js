@@ -19,6 +19,7 @@ export const APPLICATION_ROUTES = {
 
   // Activities ( List & Action )
   ACTIVITIES: `${SERVER_BASE_URL}admin/listActivity`,
+  ADD_ACTIVITY: `${SERVER_BASE_URL}admin/addActivity`,
   DELETE_ACTIVITY: `${SERVER_BASE_URL}admin/deleteActivity`,
   EDIT_ACTIVITY: `${SERVER_BASE_URL}admin/editActivity`,
 
@@ -27,7 +28,7 @@ export const APPLICATION_ROUTES = {
 
   // Posts ( List & Action )
   POSTS: `${SERVER_BASE_URL}admin/postList`,
-  DELETE_POST: `${SERVER_BASE_URL}admin/deletePost`,
+  DELETE_POST: `${SERVER_BASE_URL}admin/removePost`,
 
   // Reported ( List )
   REPORTED_USERS: `${SERVER_BASE_URL}admin/reportList`,
@@ -68,10 +69,10 @@ export const navigationIndexer = {
   dashboard: 1,
   users: 2,
   activities: 3,
-  reportedUsers: 4,
+  reportedusers: 4,
   notifications: 5,
   settings: 6,
-  reportedPosts: 7,
+  reportedposts: 7,
   posts: 8,
 };
 

@@ -3,9 +3,8 @@ import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import PolicyOutlinedIcon from "@mui/icons-material/PolicyOutlined";
 // import { toast, ToastContainer } from "react-toastify";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import Link from "next/link";
 
 import {
   switchNavigation,
@@ -20,16 +19,10 @@ import {
   settingsIndexer,
 } from "../../constants";
 import { SETTINGS_STATE_ACTION } from "../../redux/actions/actionTypes";
-import TermConditions from "./terms-Conditions";
-import PrivacyPolicy from "./privacy-policy";
-import AboutUs from "./about-us";
-import Faq from "./faq";
+import AppDetails from "../../components/AppDetails";
 import Main from "../../components/Account";
 import styles from "./index.module.scss";
-
-// const PrivacyPolicy = loadable(() => import("../PrivacyPolicy"));
-// const TermConditions = loadable(() => import("../TermConditions"));
-// const AboutUs = loadable(() => import("../AboutUs"));
+import Faq from "../../components/Faq";
 
 const SettingOption = (onClick, name, Icon, url, active) => (
   <button
@@ -43,29 +36,7 @@ const SettingOption = (onClick, name, Icon, url, active) => (
   </button>
 );
 
-const NavigationOption = (name, Icon, optionActive) => {
-  return (
-    <Link href={`/${name.replace(" ", "-").toLowerCase()}`}>
-      <a
-        className={`sidebar-item ${
-          optionActive ===
-          navigationIndexer[name.replace(" ", "").toLowerCase()]
-            ? "item-active"
-            : ""
-        }`}
-      >
-        <Icon className="sidebar-icon" />
-        {name}
-      </a>
-    </Link>
-  );
-};
-
 const Settings = (props) => {
-  const [termsConditionsContent, setTermsConditionsContent] = useState("");
-  const [aboutUsContent, setAboutUsContent] = useState("");
-  const [policyContent, setPolicyContent] = useState("");
-
   const {
     triggerNullifyApiMessage,
     triggerSwitchNavigation,
@@ -74,12 +45,10 @@ const Settings = (props) => {
     triggerUpdateState,
     settingsState,
     apiMessage,
+    fetching,
     sidebar,
+    appDetails: { aboutUs, termsAndConditions, privacyPolicy },
   } = props;
-
-  const handleTermsConditionsContent = (e) => setTermsConditionsContent(e);
-  const handleAboutUsChange = (e) => setAboutUsContent(e);
-  const handlePolicyContent = (e) => setPolicyContent(e);
 
   useEffect(() => {
     document.title = "Settings";
@@ -87,7 +56,7 @@ const Settings = (props) => {
     triggerFetchEntity(APPLICATION_ROUTES.APP_DETAILS);
     triggerSwitchNavigation(navigationIndexer.settings);
     triggerFetchEntity(APPLICATION_ROUTES.FAQ_LIST, {}, 1, 10);
-  }, []);
+  }, [triggerFetchEntity, triggerSwitchNavigation]);
 
   const handleState = (value = settingsIndexer.aboutUs) => {
     triggerUpdateState(SETTINGS_STATE_ACTION, { value });
@@ -95,12 +64,10 @@ const Settings = (props) => {
 
   const saveAppDetails = (identifier, editData) => {
     const data = {};
-    if (identifier === settingsIndexer.aboutUs) {
+    if (identifier === "About Us") {
       data.aboutUs = editData;
-    } else if (identifier === settingsIndexer.termConditions) {
+    } else if (identifier === "Terms & Conditions") {
       data.termsAndConditions = editData;
-    } else if (identifier === settingsIndexer.youtube) {
-      data.youtube = editData;
     } else {
       data.privacyPolicy = editData;
     }
@@ -134,50 +101,64 @@ const Settings = (props) => {
           }`}
         >
           <section className={styles["sidebar-modify"]}>
-            {NavigationOption(
+            {SettingOption(
+              handleState,
               "About Us",
               HelpOutlineOutlinedIcon,
+              "aboutUs",
               settingsState
             )}
 
-            {NavigationOption("FAQ", QuestionAnswerOutlinedIcon, settingsState)}
+            {SettingOption(
+              handleState,
+              "FAQ's",
+              QuestionAnswerOutlinedIcon,
+              "faq",
+              settingsState
+            )}
 
-            {NavigationOption(
+            {SettingOption(
+              handleState,
               "Terms & Conditions",
               ListAltOutlinedIcon,
+              "termConditions",
               settingsState
             )}
 
-            {NavigationOption(
+            {SettingOption(
+              handleState,
               "Privacy Policy",
               PolicyOutlinedIcon,
+              "privacyPolicy",
               settingsState
             )}
           </section>
         </div>
-        <div
-          className={styles["dynamic-setting-content"]}
-          style={{ overflow: "auto" }}
-        >
+
+        <div className="dynamicContainer" style={{ overflow: "auto" }}>
+          {settingsState.value === settingsIndexer.faq && <Faq />}
+
           {settingsState.value === settingsIndexer.aboutUs && (
-            <AboutUs
-              handleAboutUsChange={handleAboutUsChange}
-              aboutUsContent={aboutUsContent}
+            <AppDetails
+              name={"About Us"}
+              Icon={HelpOutlineOutlinedIcon}
+              content={aboutUs}
               saveAppDetails={saveAppDetails}
             />
           )}
-          {settingsState.value === settingsIndexer.faq && <Faq />}
           {settingsState.value === settingsIndexer.termConditions && (
-            <TermConditions
-              handleTermsConditionsContent={handleTermsConditionsContent}
-              termsConditionsContent={termsConditionsContent}
+            <AppDetails
+              name={"Terms & Conditions"}
+              Icon={ListAltOutlinedIcon}
+              content={termsAndConditions}
               saveAppDetails={saveAppDetails}
             />
           )}
           {settingsState.value === settingsIndexer.privacyPolicy && (
-            <PrivacyPolicy
-              handlePolicyContent={handlePolicyContent}
-              policyContent={policyContent}
+            <AppDetails
+              name={"Privacy Policy"}
+              Icon={PolicyOutlinedIcon}
+              content={privacyPolicy}
               saveAppDetails={saveAppDetails}
             />
           )}
@@ -203,8 +184,8 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const mapStateToProps = (state) => {
-  const { fetching, settingsState, apiMessage, sidebar } = state;
-  return { fetching, settingsState, apiMessage, sidebar };
+  const { fetching, settingsState, apiMessage, sidebar, appDetails } = state;
+  return { fetching, settingsState, apiMessage, sidebar, appDetails };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

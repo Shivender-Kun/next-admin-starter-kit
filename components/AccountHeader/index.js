@@ -18,7 +18,7 @@ const AccountHeader = (props) => {
       <section className={`${styles["navbar-left"]} navbar-left`}>
         <MenuOutlinedIcon
           onClick={props.sidebarHandler}
-          style={{ margin: "10px", fontSize: "50px", color: "#1e1a1a" }}
+          style={{ margin: "10px", fontSize: "50px", color: "#463dd5" }}
         />
         <ImageLogo image={ASSETS.APP_LOGO} />
       </section>

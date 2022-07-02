@@ -1,5 +1,6 @@
 import { APPLICATION_ROUTES } from "../../constants";
 import { createReducer } from "@reduxjs/toolkit";
+import { ACTIVITY_EDIT } from "../actions/actionTypes";
 
 const initialState = {
   list: [],
@@ -12,9 +13,13 @@ const initialState = {
 // Reducer
 
 const reducer = createReducer(initialState, (builder) => {
-  builder.addCase(APPLICATION_ROUTES.ACTIVITIES, (state, { data }) => {
-    Object.assign(state, data);
-  });
+  builder
+    .addCase(APPLICATION_ROUTES.ACTIVITIES, (state, action) => {
+      Object.assign(state, action.data);
+    })
+    .addCase(ACTIVITY_EDIT, (state, action) => {
+      Object.assign(state, action.payload);
+    });
 });
 
 export default reducer;

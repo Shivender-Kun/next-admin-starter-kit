@@ -1,5 +1,4 @@
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-// import { toast, ToastContainer } from "react-toastify";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Head from "next/head";
@@ -33,7 +32,7 @@ const TableRow = (post, index, deletePost, page, limit) => {
   return (
     <tr className="body-tr" key={post._id + index}>
       <td>{SerialIdFunction(limit * page - 10 + index + 1)}</td>
-      <td>{post.createdBy || "NA"}</td>
+      <td>{post.firstName + " " + post.lastName || "NA"}</td>
       <td>{post.songName || "NA"}</td>
       <td>{post.caption || "NA"}</td>
       <td>{post.activity || "NA"}</td>

@@ -1,20 +1,20 @@
 import QuestionAnswerOutlinedIcon from "@mui/icons-material/QuestionAnswerOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import { FAQ_STATE, FAQ_ADD } from "../../../redux/actions/actionTypes";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
-
-import Pagination from "../../../components/Pagination";
-import { APPLICATION_ROUTES } from "../../../constants";
-import { SerialIdFunction } from "../../../util/regFun";
 import { connect } from "react-redux";
+import React from "react";
+
 import {
   genericUpdateState,
   genericApiHit,
   fetchEntity,
-} from "../../../redux/actions";
-import React from "react";
+} from "../../redux/actions";
+import { FAQ_STATE, FAQ_ADD } from "../../redux/actions/actionTypes";
+import { APPLICATION_ROUTES } from "../../constants";
+import { SerialIdFunction } from "../../util/regFun";
+import Pagination from "../Pagination";
 import "./index.module.scss";
 
 const FaqEdit = ({
@@ -180,7 +180,7 @@ const Faq = (props) => {
             style={{ display: "flex", alignItems: "center" }}
           >
             <QuestionAnswerOutlinedIcon fontSize="large" />
-            &nbsp;FAQ's
+            &nbsp;{"FAQ's"}
           </div>
           <div className="content-top-left">
             {faqsData &&

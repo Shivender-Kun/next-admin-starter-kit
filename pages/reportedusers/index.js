@@ -74,7 +74,7 @@ const ReportedUsers = (props) => {
 
   useEffect(() => {
     triggerFetchEntity(APPLICATION_ROUTES.REPORTED_USERS, {}, 1, 10);
-    triggerSwitchNavigation(navigationIndexer.reportedUsers);
+    triggerSwitchNavigation(navigationIndexer.reportedusers);
   }, [triggerFetchEntity, triggerSwitchNavigation]);
 
   const handlePaginationNext = (e) => {

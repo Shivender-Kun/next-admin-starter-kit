@@ -10,11 +10,14 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import Link from "next/link";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   switchNavigation,
   genericUpdateState,
   fetchEntity,
+  nullifyApiMessage,
 } from "../../redux/actions";
 import { SIDEBAR_ACTION } from "../../redux/actions/actionTypes";
 import { navigationIndexer } from "../../constants";
@@ -43,7 +46,14 @@ const NavigationOption = (name, Icon, optionActive) => {
 };
 
 const Account = (props) => {
-  const { triggerUpdateState, active, sidebar, fetching } = props;
+  const {
+    triggerUpdateState,
+    active,
+    sidebar,
+    fetching,
+    apiMessage,
+    triggerNullifyApiMessage,
+  } = props;
 
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) window.location = "/";
@@ -53,7 +63,7 @@ const Account = (props) => {
       const sec = document.getElementsByClassName("navbar-left")[0];
       sec.style.minWidth = "150px";
     }
-  }, []);
+  }, [triggerUpdateState]);
 
   const sidebarHandler = () => {
     triggerUpdateState(SIDEBAR_ACTION, { value: !sidebar.value });
@@ -62,10 +72,21 @@ const Account = (props) => {
     sec.style.justifyContent = sidebar.value ? "space-between" : "space-evenly";
   };
 
+  if (apiMessage.message) {
+    toast.dismiss();
+    if (apiMessage.code === 100) {
+      toast.success(apiMessage.message);
+    } else {
+      console.log(apiMessage.message);
+      toast.error(apiMessage.message);
+    }
+    triggerNullifyApiMessage();
+  }
+
   return (
     <section className={styles["navigation"]}>
       {LoadingOverlay({ show: fetching })}
-
+      <ToastContainer />
       <AccountHeader sidebarHandler={sidebarHandler} />
       <section
         className={styles["navigation-bottom"]}
@@ -80,7 +101,11 @@ const Account = (props) => {
             <section className="sidebar">
               {NavigationOption("Dashboard", DashboardOutlinedIcon, active)}
 
-              {NavigationOption("Activity", LocalActivityOutlinedIcon, active)}
+              {NavigationOption(
+                "Activities",
+                LocalActivityOutlinedIcon,
+                active
+              )}
 
               {NavigationOption("Users", PersonOutlinedIcon, active)}
 
@@ -109,10 +134,7 @@ const Account = (props) => {
           </div>
         </section>
 
-        <section
-          className={styles["dynamicContainer"]}
-          style={{ overflow: "auto" }}
-        >
+        <section className="dynamicContainer" style={{ overflow: "auto" }}>
           <section className="content-container">
             {props.children || <Dashboard />}
           </section>
@@ -129,16 +151,18 @@ const mapDispatchToProps = (dispatch) => {
     triggerSwitchNavigation: (active) => dispatch(switchNavigation({ active })),
     triggerUpdateState: (type, value) =>
       dispatch(genericUpdateState({ type, value })),
+    triggerNullifyApiMessage: () => dispatch(nullifyApiMessage()),
   };
 };
 
 const mapStateToProps = (state) => {
   const {
     fetching,
+    apiMessage,
     navigation: { active },
     sidebar,
   } = state;
-  return { fetching, active, sidebar };
+  return { fetching, active, sidebar, apiMessage };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account);

@@ -22,6 +22,7 @@ export const LOGIN_PAYLOAD = createAction("LOGIN_PAYLOAD");
 
 export const SUCCESS = createAction("SUCCESS");
 export const TRANSIENT_TOGGLE = createAction("TRANSIENT_TOGGLE");
+export const ACTIVITY_EDIT = createAction("ACTIVITY_EDIT");
 
 export const MODAL_ACTION = createAction("MODAL_ACTION");
 export const API_MESSAGE = createAction("API_MESSAGE");

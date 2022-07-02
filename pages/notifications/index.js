@@ -1,5 +1,5 @@
-// import { toast, ToastContainer } from "react-toastify";
-import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import React, { useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import Head from "next/head";
 import Image from "next/image";
@@ -74,7 +74,6 @@ const Notifications = (props) => {
   const {
     users: { list },
     apiMessage,
-    triggerNullifyApiMessage,
     triggerSwitchNavigation,
     triggerUpdateState,
     triggerFetchEntity,
@@ -83,9 +82,6 @@ const Notifications = (props) => {
 
   useEffect(() => {
     triggerSwitchNavigation(navigationIndexer.notifications);
-  }, [triggerSwitchNavigation]);
-
-  useEffect(() => {
     triggerFetchEntity(
       APPLICATION_ROUTES.USERS,
       {
@@ -95,11 +91,11 @@ const Notifications = (props) => {
       1,
       100000000
     );
-  }, [searchInput, triggerFetchEntity]);
+  }, [searchInput, triggerFetchEntity, triggerSwitchNavigation]);
 
-  useEffect(() => {
+  useMemo(() => {
     if (list.length) {
-      const allUsers = list.filter((user, index) => {
+      const allUsers = list.filter((user) => {
         return user.blocked !== true;
       });
       setnewUserList(allUsers);
@@ -108,6 +104,18 @@ const Notifications = (props) => {
 
   const handleActiveState = (value = NOTIFICATION_LIST.NONE) => {
     triggerUpdateState(SWITCH_NOTIFICATION_LIST, { value });
+  };
+
+  const selectOne = (id) => {
+    if (selectedUsers.indexOf(id) > -1) {
+      selectedUsers.splice(selectedUsers.indexOf(id), 1);
+    } else {
+      selectedUsers.push(id);
+    }
+
+    if (selectedUsers.length === newUserList.length) {
+      handleActiveState(NOTIFICATION_LIST.ALL);
+    } else handleActiveState(NOTIFICATION_LIST.SELECTED);
   };
 
   const selectAll = () => {
@@ -135,26 +143,14 @@ const Notifications = (props) => {
     handleActiveState(NOTIFICATION_LIST.NONE);
   };
 
-  const selectOne = (id) => {
-    if (selectedUsers.indexOf(id) > -1) {
-      selectedUsers.splice(selectedUsers.indexOf(id), 1);
-    } else {
-      selectedUsers.push(id);
-    }
-
-    if (selectedUsers.length === newUserList.length) {
-      handleActiveState(NOTIFICATION_LIST.ALL);
-    } else handleActiveState(NOTIFICATION_LIST.SELECTED);
-  };
-
   const sendNotifications = () => {
     if (!selectedUsers.length) {
-      // toast.dismiss();
-      // return toast.warn("Please select some users to send notifications to!");
+      toast.dismiss();
+      return toast.warn("Please select some users to send notifications to!");
     }
     if (!document.getElementById("notificationText").value) {
-      // toast.dismiss();
-      // return toast.warn("Notification message cannot be empty!");
+      toast.dismiss();
+      return toast.warn("Notification message cannot be empty!");
     }
     props.triggerGenericApiHit(APPLICATION_ROUTES.NOTIFICATION_BROADCAST, {
       userIds: selectedUsers,
@@ -167,20 +163,16 @@ const Notifications = (props) => {
   };
 
   if (apiMessage.message) {
-    // eslint-disable-next-line no-unused-expressions
-    // toast.dismiss();
     if (apiMessage.code === 100) {
       selectedUsers = [];
-      const checkboxes = document.querySelectorAll("input.checkbox");
+      const checkboxes = document.querySelectorAll(
+        `input.${styles["checkbox"]}`
+      );
       checkboxes.forEach((checkbox) => {
         checkbox.checked = false;
       });
-      // toast.success(apiMessage.message);
       document.getElementById("notificationText").value = "";
-    } else {
-      // toast.error(apiMessage.message);
     }
-    triggerNullifyApiMessage();
   }
 
   return (
@@ -254,7 +246,6 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(genericApiHit({ endpoint, payload, page, limit })),
     triggerUpdateState: (type, value) =>
       dispatch(genericUpdateState({ type, value })),
-    triggerNullifyApiMessage: () => dispatch(nullifyApiMessage()),
   };
 };
 const mapStateToProps = (state) => {

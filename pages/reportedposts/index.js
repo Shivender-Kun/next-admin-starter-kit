@@ -63,7 +63,7 @@ const ReportedPosts = (props) => {
 
   useEffect(() => {
     triggerFetchEntity(APPLICATION_ROUTES.REPORTED_POSTS, {}, 1, 10);
-    triggerSwitchNavigation(navigationIndexer.reportedPosts);
+    triggerSwitchNavigation(navigationIndexer.reportedposts);
   }, [triggerFetchEntity, triggerSwitchNavigation]);
 
   const handlePaginationNext = (e) => {

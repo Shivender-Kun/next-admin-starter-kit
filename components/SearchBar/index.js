@@ -1,6 +1,5 @@
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
-import Button from "@mui/material/Button";
 import React from "react";
 import styles from "./index.module.scss";
 
@@ -24,14 +23,14 @@ const Searchbar = ({ setSearchInput, searchInput }) => {
           }}
         />
       )}
-      <Button
+      <button
         onClick={() =>
           setSearchInput(document.getElementById("searchQueryInput").value)
         }
         className={styles["search__go"]}
       >
         Go
-      </Button>
+      </button>
     </div>
   );
 };
